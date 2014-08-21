@@ -13,6 +13,7 @@
         "mongodb": "*",
         "connect-mongo": "*",
         "mongoose": "*",
-        "bigpipe": "*"
+        "bigpipe": "*",
+        "nodemon":"*"
     }
 }
