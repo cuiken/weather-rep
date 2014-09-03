@@ -1,10 +1,11 @@
-var config = require("./config");
+var config = require("./config").config;
 var express = require('express');
 var http = require('http');
 var path = require('path');
 
+var spider = require('./spider');
+
 var oneDay = 86400000;
-var interval = 60 * 60 * 1000; //运行间隔时间
 
 var app = express();
 app.use(express.compress());
@@ -32,13 +33,12 @@ if ('development' == app.get('env')) {
 //爬虫开始
 setTimeout(function () {
 
-    console.log('第一轮抓取完毕');
+    spider.fetch();
 
     setInterval(function () {
 
-        console.log('第一轮定时抓取完毕');
 
-    }, interval);
+    }, config.interval);
 }, 5000);
 
 http.createServer(app).listen(app.get('port'), function () {

@@ -10,14 +10,16 @@ var config = {
         includelocation: "yes",
         tp: 24,
         lang: "zh",
-        key: "b043050c02b8df28740eaa239c748f87c7ca5f3f"
+        key: "736cd986430acd194eff2d6fb2390c16eecb2546"
     },
 
     db: 'mongodb://127.0.0.1/weather_res',
     db_name: 'weather_res',
     session_secret: 'weather_res',
     auth_cookie_name: 'weather_res',
-    port: 3001
+    port: 3001,
+
+    interval: 60 * 60 * 1000 //运行间隔1小时
 
 };
 module.exports = config;
