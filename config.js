@@ -9,7 +9,7 @@ var config = {
         fx24: "no",
         includelocation: "yes",
         tp: 24,
-        lang: "zh",
+//        lang: "zh",
         key: "736cd986430acd194eff2d6fb2390c16eecb2546"
     },
 
@@ -19,7 +19,7 @@ var config = {
     auth_cookie_name: 'weather_res',
     port: 3001,
 
-    interval: 60 * 60 * 1000 //运行间隔1小时
+    interval: 3 * 60 * 60 * 1000 //运行间隔3小时
 
 };
 module.exports = config;

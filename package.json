@@ -14,6 +14,8 @@
         "connect-mongo": "*",
         "mongoose": "*",
         "bagpipe": "*",
-        "nodemon":"*"
+        "nodemon":"*",
+        "nodemailer": "*",
+        "eventproxy": "0.3.1"
     }
 }
