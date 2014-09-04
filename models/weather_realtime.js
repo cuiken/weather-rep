@@ -1,27 +1,17 @@
+/**
+ * Created by Ken.Cui on 2014/9/3.
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-var WeatherSchema = new Schema({
+var WeatherRealtimeSchema = new Schema({
 
-    date: {type: String},
+    area_id: {type: ObjectId},
+
     weatherCode: {type: Number, default: 0},
     weatherDesc: {type: String},
     weatherIconUrl: {type: String},
-
-    HeatIndexC: {type: String},
-    HeatIndexF: {type: String},
-    time: {type: Number, default: 0},
-    WindChillC: {type: String},
-    WindChillF: {type: String},
-    WindGustKmph: {type: String},
-    WindGustMiles: {type: String},
-    DewPointC: {type: String},
-    DewPointF: {type: String},
-    maxtempC: {type: String},
-    maxtempF: {type: String},
-    mintempC: {type: String},
-    mintempF: {type: String},
 
     cloudcover: {type: String},
     FeelsLikeC: {type: String},
@@ -35,14 +25,13 @@ var WeatherSchema = new Schema({
     windspeedKmph: {type: String},      //风速（公里/小时）
     windspeedMiles: {type: String},     //风速(英里/小时)
 
-    astronomy_id: {type: ObjectId},
-    area_id: {type: ObjectId},
-    chanceof_id: {type: ObjectId},
+    observation_time: {type: String},
+    temp_C: {type: String},
+    temp_F: {type: String},
 
-    create_at: {type: Date, default: Date.now},
-    update_at: {type: Date, default: Date.now}
+    create_at: {type: Date, default: Date.now}
 });
 
-WeatherSchema.index({area_id: 1, date: 1});
+WeatherRealtimeSchema.index({area_id: 1, create_at: -1});
 
-mongoose.model('Weather', WeatherSchema);
+mongoose.model('WeatherRealtime', WeatherRealtimeSchema);

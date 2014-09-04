@@ -15,7 +15,8 @@ var ChanceofSchema = new Schema({
     chanceofsunshine: {type: String},
     chanceofthunder: {type: String},
     chanceofwindy: {type: String},
-    create_at: {type: Date, default: Date.now}
+    create_at: {type: Date, default: Date.now},
+    update_at: {type: Date, default: Date.now}
 });
 
 mongoose.model('Chanceof', ChanceofSchema);

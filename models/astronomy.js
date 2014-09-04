@@ -9,7 +9,10 @@ var AstronomySchema = new Schema({
     moonset: {type: String},
     sunrise: {type: String},
     sunset: {type: String},
-    create_at: {type: Date, default: Date.now}
+    create_at: {type: Date, default: Date.now},
+    update_at: {type: Date, default: Date.now}
 });
+
+AstronomySchema.index({create_at: -1});
 
 mongoose.model('Astronomy', AstronomySchema);
