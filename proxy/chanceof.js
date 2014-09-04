@@ -1,7 +1,7 @@
 /**
  * Created by Ken.Cui on 2014/9/4.
  */
-var Chanceof = require('..models').Chanceof;
+var Chanceof = require('../models').Chanceof;
 
 exports.newAndSave = function (data, callback) {
     var chanceof = new Chanceof();
@@ -15,5 +15,5 @@ exports.newAndSave = function (data, callback) {
     chanceof.chanceofsunshine = data.chanceofsunshine;
     chanceof.chanceofthunder = data.chanceofthunder;
     chanceof.chanceofwindy = data.chanceofwindy;
-    chanceof.save(callback);
+    chanceof.save(callback(chanceof));
 }

@@ -33,10 +33,14 @@ if ('development' == app.get('env')) {
 //爬虫开始
 setTimeout(function () {
 
-    spider.fetch();
+    spider.fetch(function (err) {
+        console.log(err)
+    });
 
     setInterval(function () {
-
+        spider.fetch(function (err) {
+            console.log(err)
+        });
 
     }, config.interval);
 }, 5000);

@@ -3,6 +3,11 @@
  */
 var Area = require('../models').Area;
 
+
+exports.getByRequestLatAndLon=function(){
+
+}
+
 exports.newAndSave = function (data, callback) {
     var area = new Area();
     area.areaName = data.areaName;
@@ -14,5 +19,5 @@ exports.newAndSave = function (data, callback) {
     area.weatherUrl = data.weatherUrl;
     area.origin_latitude = data.origin_latitude;
     area.origin_longitude = data.origin_longitude;
-    area.save(callback);
+    area.save(callback(area));
 }
