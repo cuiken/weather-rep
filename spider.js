@@ -63,8 +63,8 @@ function saveWeather(data, area) {
     WeatherReal.newAndSave(realWeather);
 
     weathers.forEach(function (w) {
-        var weather = getWeather(w, areaId);
-
+        var weather = getWeather(w);
+        weather.area_id = areaId;
         Weather.newAndSave(weather)
 
     })
@@ -89,7 +89,7 @@ function getWeatherRealtime(originData) {
     return weatherReal;
 }
 
-function getWeather(originData, area_id) {
+function getWeather(originData) {
     var w = originData.hourly[0];
     var as = originData.astronomy[0];
     w.sunrise = as.sunrise;
@@ -99,7 +99,6 @@ function getWeather(originData, area_id) {
     w.date = originData.date;
     w.weatherIconUrl = w.weatherIconUrl[0].value;
     w.weatherDesc = w.weatherDesc[0].value;
-    w.area_id = area_id;
     return w;
 }
 
