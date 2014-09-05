@@ -63,9 +63,16 @@ function saveWeather(data, area) {
     WeatherReal.newAndSave(realWeather);
 
     weathers.forEach(function (w) {
+
         var weather = getWeather(w);
         weather.area_id = areaId;
-        Weather.newAndSave(weather)
+        Weather.getWeatherByDate(w.date,areaId,function(err,saved){
+            if(saved==undefined){
+                Weather.newAndSave(weather);
+            }else{
+                Weather.update(saved,weather);
+            }
+        })
 
     })
 }
