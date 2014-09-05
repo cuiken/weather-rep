@@ -9,6 +9,22 @@ var WeatherSchema = new Schema({
     weatherDesc: {type: String},
     weatherIconUrl: {type: String},
 
+    moonrise: {type: String},
+    moonset: {type: String},
+    sunrise: {type: String},
+    sunset: {type: String},
+
+    chanceoffog: {type: String},
+    chanceoffrost: {type: String},
+    chanceofhightemp: {type: String},
+    chanceofovercast: {type: String},
+    chanceofrain: {type: String},
+    chanceofremdry: {type: String},
+    chanceofsnow: {type: String},
+    chanceofsunshine: {type: String},
+    chanceofthunder: {type: String},
+    chanceofwindy: {type: String},
+
     HeatIndexC: {type: String},
     HeatIndexF: {type: String},
     time: {type: Number, default: 0},
@@ -35,9 +51,9 @@ var WeatherSchema = new Schema({
     windspeedKmph: {type: String},      //风速（公里/小时）
     windspeedMiles: {type: String},     //风速(英里/小时)
 
-    astronomy_id: {type: ObjectId},
+
     area_id: {type: ObjectId},
-    chanceof_id: {type: ObjectId},
+
 
     create_at: {type: Date, default: Date.now},
     update_at: {type: Date, default: Date.now}

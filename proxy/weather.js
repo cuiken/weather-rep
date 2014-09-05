@@ -5,6 +5,7 @@
 var models = require('../models');
 var Weather = models.Weather;
 
+
 exports.newAndSave = function (data, callback) {
     var weather = new Weather();
     weather.date = data.date;
@@ -36,9 +37,21 @@ exports.newAndSave = function (data, callback) {
     weather.windspeedKmph = data.windspeedKmph;
     weather.windspeedMiles = data.windspeedMiles;
 
-    weather.astronomy_id = data.astronomy_id;
     weather.area_id = data.area_id;
-    weather.chanceof_id = data.chanceof_id;
+    weather.moonrise = data.moonrise;
+    weather.moonset = data.moonset;
+    weather.sunrise = data.sunrise;
+    weather.sunset = data.sunset;
+    weather.chanceoffog = data.chanceoffog;
+    weather.chanceoffrost = data.chanceoffrost;
+    weather.chanceofhightemp = data.chanceofhightemp;
+    weather.chanceofovercast = data.chanceofovercast;
+    weather.chanceofrain = data.chanceofrain;
+    weather.chanceofremdry = data.chanceofremdry;
+    weather.chanceofsnow = data.chanceofsnow;
+    weather.chanceofsunshine = data.chanceofsunshine;
+    weather.chanceofthunder = data.chanceofthunder;
+    weather.chanceofwindy = data.chanceofwindy;
 
     weather.save(callback);
 }
