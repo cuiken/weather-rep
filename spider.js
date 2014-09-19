@@ -39,7 +39,7 @@ function DB(data, local) {
 
     Area.getByRequestLatAndLon(lat, lon, function (err, area) {
 
-        if (area == undefined) {
+        if (!area) {
             var areaData = getArea(data);
             areaData.origin_latitude = lat;
             areaData.origin_longitude = lon;
@@ -67,7 +67,7 @@ function saveWeather(data, area) {
         var weather = getWeather(w);
         weather.area_id = areaId;
         Weather.getWeatherByDate(w.date,areaId,function(err,saved){
-            if(saved==undefined){
+            if(!saved){
                 Weather.newAndSave(weather);
             }else{
                 Weather.update(saved,weather);

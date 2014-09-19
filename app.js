@@ -2,6 +2,7 @@ var config = require("./config").config;
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var routes = require('./routes');
 
 var spider = require('./spider');
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public'), {maxAge: oneDay}));
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
+routes(app);
 
 //爬虫开始
 setTimeout(function () {
