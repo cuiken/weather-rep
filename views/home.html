@@ -12,17 +12,34 @@
         .container {
             margin-top: 20px;
         }
+
+        textarea {
+            width: 100%;
+            min-height: 175px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <form class="form-inline">
-        <input class="form-control" type="text" placeholder="Latitude,Longitude"/>
-        <button type="button" class="btn btn-primary">Query</button>
+    <form class="form-inline" action="/" method="get">
+        <input class="form-control" name="lonLat" value="<%= lonLat%>" placeholder="Latitude,Longitude"/>
+        <button type="submit" class="btn btn-primary">Query</button>
         <div class="weather"></div>
     </form>
+
+    <textarea id="data"></textarea>
+
 </div>
 
+<script src="/js/jquery-1.11.1.min.js"></script>
+<script>
+    $(function () {
+        var url = '/weather?lonLat=' + $('input[name=lonLat]').val();
+        $.getJSON(url, function (data) {
+            $('#data').text(JSON.stringify(data));
+        })
+    })
 
+</script>
 </body>
 </html>

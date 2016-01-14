@@ -25,9 +25,28 @@ var fetch = function (next) {
             if (err) {
                 return next(err);
             } else {
+                console.log('data=>' + JSON.stringify(data.data));
                 DB(data.data, local, next);
             }
         });
+    });
+};
+
+var query = function (latLon, next) {
+    var url = config.remote_host;
+    var params = config.req_param;
+
+    params.q = latLon;
+    urllib.request(url, {dataType: 'json', timeout: 10000, data: params}, function (err, data) {
+        if (err) {
+            return next(err);
+        } else {
+            var weather = data.data;
+            console.log('data=>' + JSON.stringify(weather));
+            if (weather.nearest_area != null && weather.nearest_area[0] != null) {
+                DB(weather, latLon, next);
+            }
+        }
     });
 };
 
@@ -39,7 +58,7 @@ function DB(data, local) {
 
     Area.getByRequestLatAndLon(lat, lon, function (err, area) {
 
-        if (!area) {
+        if (area == null) {
             var areaData = getArea(data);
             areaData.origin_latitude = lat;
             areaData.origin_longitude = lon;
@@ -66,11 +85,11 @@ function saveWeather(data, area) {
 
         var weather = getWeather(w);
         weather.area_id = areaId;
-        Weather.getWeatherByDate(w.date,areaId,function(err,saved){
-            if(!saved){
+        Weather.getWeatherByDate(w.date, areaId, function (err, saved) {
+            if (!saved) {
                 Weather.newAndSave(weather);
-            }else{
-                Weather.update(saved,weather);
+            } else {
+                Weather.update(saved, weather);
             }
         })
 
@@ -110,5 +129,5 @@ function getWeather(originData) {
 }
 
 
-module.exports = fetch;
 module.exports.fetch = fetch;
+module.exports.query = query;

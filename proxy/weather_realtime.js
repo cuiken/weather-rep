@@ -3,6 +3,10 @@
  */
 var WeatherRealtime = require('../models').WeatherRealtime;
 
+exports.findByArea = function (areaId, callback) {
+    WeatherRealtime.find({area_id: areaId}, callback).sort({'create_at': -1}).limit(1);
+};
+
 exports.newAndSave = function (data, callback) {
     var wr = new WeatherRealtime();
     wr.area_id = data.area_id;
