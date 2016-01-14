@@ -27,6 +27,7 @@ module.exports = function (app) {
         var lon = ls[1];
 
         Area.getByRequestLatAndLon(lat, lon, function (err, data) {
+            if(data==null) return;
             WeatherRealtime.findByArea(data._id,function(err,data){
                 res.json(data);
             });
