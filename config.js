@@ -1,5 +1,6 @@
 var config = {
     remote_host: "http://api.worldweatheronline.com/premium/v1/weather.ashx",
+    api_host:'http://www.zevercloud.com/api/v1/latLon',
     req_param: {
         //Pass US Zipcode, UK Postcode, Canada Postalcode, IP address, Latitude/Longitude (decimal degree) or city name
         q: "31.2,120.7",

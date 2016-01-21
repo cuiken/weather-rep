@@ -15,20 +15,30 @@ var WeatherReal = require('./proxy').WeatherRealtime;
 var fetch = function (next) {
 
     var bagpipe = new Bagpipe(10);
-    var locations = ['31.9,119.1', '32.6,103.6'];
+    //var locations = ['31.9,119.1', '32.6,103.6'];
     var url = config.remote_host;
     var params = config.req_param;
 
-    locations.forEach(function (local) {
-        params.q = local;
-        bagpipe.push(urllib.request, url, {dataType: 'json', timeout: 10000, data: params}, function (err, data) {
-            if (err) {
-                return next(err);
-            } else {
-                console.log('data=>' + JSON.stringify(data.data));
-                DB(data.data, local, next);
-            }
-        });
+    urllib.request(config.api_host, {dataType: 'json', timeout: 10000}, function (err, data) {
+        if (data) {
+
+            data.forEach(function (local) {
+                params.q = local;
+                bagpipe.push(urllib.request, url, {
+                    dataType: 'json',
+                    timeout: 10000,
+                    data: params
+                }, function (err, data) {
+                    if (err) {
+                        return next(err);
+                    } else {
+                        console.log('data=>' + JSON.stringify(data.data));
+                        DB(data.data, local, next);
+                    }
+                });
+            });
+
+        }
     });
 };
 
@@ -52,7 +62,7 @@ var query = function (latLon, next) {
 
 function DB(data, local) {
 
-    var ls = local.split(',');
+    var ls = local;
     var lat = ls[0];
     var lon = ls[1];
 
@@ -60,6 +70,7 @@ function DB(data, local) {
 
         if (area == null) {
             var areaData = getArea(data);
+            if (areaData == null) return;
             areaData.origin_latitude = lat;
             areaData.origin_longitude = lon;
             Area.newAndSave(areaData, function (err, saved) {
@@ -100,6 +111,7 @@ function saveWeather(data, area) {
 function getArea(originData) {
 
     var area = originData.nearest_area[0];
+    if (area == null) return;
     area.areaName = area.areaName[0].value;
     area.country = area.country[0].value;
     area.region = area.region[0].value;

@@ -2,7 +2,7 @@
  * Created by Ken.Cui on 2014/9/10.
  */
 var Area = require('./proxy').Area;
-var WeatherRealtime=require('./proxy').WeatherRealtime;
+var WeatherRealtime = require('./proxy').WeatherRealtime;
 
 var spider = require('./spider');
 
@@ -27,8 +27,11 @@ module.exports = function (app) {
         var lon = ls[1];
 
         Area.getByRequestLatAndLon(lat, lon, function (err, data) {
-            if(data==null) return;
-            WeatherRealtime.findByArea(data._id,function(err,data){
+            if (data == null) {
+                res.json({});
+                return;
+            }
+            WeatherRealtime.findByArea(data._id, function (err, data) {
                 res.json(data);
             });
 
